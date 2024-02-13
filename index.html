@@ -13,6 +13,15 @@
     </div></a>
 </div>
   <meta http-equiv="" content="3; URL=https://www.yoururl.com/newpage" />
+  <script>
+  function disableRightClick(event) {
+    if (event.button == 2) {
+      event.preventDefault(); // Prevent the default right-click behavior
+      alert("Right click disabled!");
+      return false;
+    }
+  }
+</script>
 <script src="https://content.jwplatform.com/libraries/SAHhwvZq.js"></script>
 
 <div id="jwplayerDiv"></div>
