@@ -1,37 +1,17 @@
-<!DOCTYPE html>
-<html>
+var config = {
+  key: "YOUR-PLAYER-LICENSE-KEY-HERE",
+};
 
-<head>
-  <link rel="stylesheet" type="text/css" href="https://cdn.bitmovin.com/bitmovin-player/stable/7/bitmovinplayer.css">
-  <script src="https://cdn.bitmovin.com/bitmovin-player/stable/7/bitmovinplayer.js"></script>
-</head>
+var source = {
+  dash: "https://example.com/path/to/your/clear-key/content/manifest.mpd",
+  drm: {
+    clearkey: [{
+      key: 'YOUR-KEY-HERE',
+      kid: 'YOUR-KID-HERE' //optional
+    }]
+  },
+};
 
-<body>
-  <div id="bitmovin-player"></div>
+var player = new bitmovin.player.Player(document.getElementById('player'), config);
 
-  <script>
-    const config = {
-      key: '6387942d-81ea-4a3f-8708-1c80fd9c221e',
-      source: {
-        dash: 'https://bpprod6linear.akamaized.net/bpk-tv/irdeto_com_Channel_411/output/manifest.mpd',
-        drm: {
-          clearkey: {
-            key: 'bbbc36a45c7a5ec4878e04c437853b09',
-            keyId: 'ec2353b02f54483761d14567ecc15b60',
-          },
-        },
-      },
-    };
-
-    const playerContainer = document.getElementById('bitmovin-player');
-    const player = new bitmovin.player.Player(playerContainer, config);
-
-    player.load(config.source).then(() => {
-      console.log('Bitmovin Player loaded successfully.');
-    }).catch((error) => {
-      console.error('Error loading Bitmovin Player:', error);
-    });
-  </script>
-</body>
-
-</html>
+player.load(source);
