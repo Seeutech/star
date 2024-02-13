@@ -1,17 +1,16 @@
-var config = {
-  key: "YOUR-PLAYER-LICENSE-KEY-HERE",
-};
+</html>
 
-var source = {
-  dash: "https://example.com/path/to/your/clear-key/content/manifest.mpd",
-  drm: {
-    clearkey: [{
-      key: 'YOUR-KEY-HERE',
-      kid: 'YOUR-KID-HERE' //optional
-    }]
-  },
-};
+<script src="https://content.jwplatform.com/libraries/SAHhwvZq.js"></script>
 
-var player = new bitmovin.player.Player(document.getElementById('player'), config);
-
-player.load(source);
+<div id="jwplayerDiv"></div>
+<script>  
+jwplayer("jwplayerDiv").setup({
+        file: "https://bpprod6linear.akamaized.net/bpk-tv/irdeto_com_Channel_411/output/manifest.mpd",
+      type: "dash",
+      drm: { "clearkey": {
+              "keyId": "ec2353b02f54483761d14567ecc15b60",
+              "key": "bbbc36a45c7a5ec4878e04c437853b09"
+            }
+             }
+});
+</script>
