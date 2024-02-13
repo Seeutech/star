@@ -1,27 +1,37 @@
-
+<!DOCTYPE html>
 <html>
-  <body>
-    <div id="playerContainer"></div>
-    <script src="https://cdn.jsdelivr.net/npm/indigo-player@1/lib/indigo-player.js"></script>
-    <script>
-      const config = {
-        sources: [
-          {
-            type: 'dash',
-            file: "https://bpprod6linear.akamaized.net/bpk-tv/irdeto_com_Channel_411/output/manifest.mpd",
-          }
-            drm: { "clearkey": {
-              "keyId": "bbbc36a45c7a5ec4878e04c437853b09",
-              "key": "ec2353b02f54483761d14567ecc15b60"
-            }
-             }
-        ],
-      };
 
-      const element = document.getElementById('playerContainer');
-      const player = IndigoPlayer.init(element, config);
+<head>
+  <link rel="stylesheet" type="text/css" href="https://cdn.bitmovin.com/bitmovin-player/stable/7/bitmovinplayer.css">
+  <script src="https://cdn.bitmovin.com/bitmovin-player/stable/7/bitmovinplayer.js"></script>
+</head>
 
-      // You can use the player object now to access the player and it's methods (play, pause, ...)
-    </script>
-  </body>
+<body>
+  <div id="bitmovin-player"></div>
+
+  <script>
+    const config = {
+      key: 'YOUR_BITMOVIN_PLAYER_LICENSE_KEY',
+      source: {
+        dash: 'https://bpprod6linear.akamaized.net/bpk-tv/irdeto_com_Channel_411/output/manifest.mpd',
+        drm: {
+          clearkey: {
+            key: 'bbbc36a45c7a5ec4878e04c437853b09',
+            keyId: 'ec2353b02f54483761d14567ecc15b60',
+          },
+        },
+      },
+    };
+
+    const playerContainer = document.getElementById('bitmovin-player');
+    const player = new bitmovin.player.Player(playerContainer, config);
+
+    player.load(config.source).then(() => {
+      console.log('Bitmovin Player loaded successfully.');
+    }).catch((error) => {
+      console.error('Error loading Bitmovin Player:', error);
+    });
+  </script>
+</body>
+
 </html>
