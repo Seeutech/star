@@ -1,18 +1,27 @@
-</html>
-<body bgcolor="black">
-   <meta http-equiv="refresh" targer="_blank" content="5; url=https://t.me/+qdLjzK5bWoViOWQ1/">
-<script src="https://content.jwplatform.com/libraries/SAHhwvZq.js"></script>
 
-<div id="jwplayerDiv"></div>
-  width="100%" height="150%">
-<script>  
-jwplayer("jwplayerDiv").setup({
-        file: "https://bpprod6linear.akamaized.net/bpk-tv/irdeto_com_Channel_411/output/manifest.mpd",
-      type: "dash",
-      drm: { "clearkey": {
+<html>
+  <body>
+    <div id="playerContainer"></div>
+    <script src="https://cdn.jsdelivr.net/npm/indigo-player@1/lib/indigo-player.js"></script>
+    <script>
+      const config = {
+        sources: [
+          {
+            type: 'dash',
+            src: 'https://bpprod6linear.akamaized.net/bpk-tv/irdeto_com_Channel_411/output/manifest.mpd',
+              drm: { "clearkey": {
               "keyId": "bbbc36a45c7a5ec4878e04c437853b09",
               "key": "ec2353b02f54483761d14567ecc15b60"
             }
              }
-});
-</script>
+          }
+        ],
+      };
+
+      const element = document.getElementById('playerContainer');
+      const player = IndigoPlayer.init(element, config);
+
+      // You can use the player object now to access the player and it's methods (play, pause, ...)
+    </script>
+  </body>
+</html>
