@@ -8,6 +8,9 @@ jwplayer("jwplayerDiv").setup({
         file: "https://bpprod6linear.akamaized.net/bpk-tv/irdeto_com_Channel_411/output/manifest.mpd",
       type: "dash",
       drm: { "clearkey":  
+                  if (channelData.url.endsWith('.mpd')) {
+                // Set up DRM for DASH with keys if available
+                playerSetup.type = 'dash';
            // Check if Clear Key is available
         if (channelData.license_key && channelData.license_key2) {
                     playerSetup.drm = {
