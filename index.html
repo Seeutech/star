@@ -25,28 +25,8 @@ function myFunction() {
       event.preventDefault();
     });
   </script>
- <script>
-    /*function check(e)
-    {
-    alert(e.keyCode);
-    }*/
-    document.onkeydown = function(e) {
-            if (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 86 || e.keyCode === 85 || e.keyCode === 117)) {//Alt+c, Alt+v will also be disabled sadly.
-                alert('You are not allowed to view the content of the page');
-            }
-            return false;
-    };
-    </script>
-<script>  
-jwplayer("jwplayerDiv").setup({
-        file: "https://bpprod6linear.akamaized.net/bpk-tv/irdeto_com_Channel_411/output/manifest.mpd",
-      type: "dash",
-      drm: { "clearkey": {
-              "keyId": "bbbc36a45c7a5ec4878e04c437853b09",
-              "key": "ec2353b02f54483761d14567ecc15b60"
-            }
-             }
-});
+<script>
+document.write(unescape('%20%3Cscript%3E%0A%20%20%20%20/*function%20check%28e%29%0A%20%20%20%20%7B%0A%20%20%20%20alert%28e.keyCode%29%3B%0A%20%20%20%20%7D*/%0A%20%20%20%20document.onkeydown%20%3D%20function%28e%29%20%7B%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20%28e.ctrlKey%20%26%26%20%28e.keyCode%20%3D%3D%3D%2067%20%7C%7C%20e.keyCode%20%3D%3D%3D%2086%20%7C%7C%20e.keyCode%20%3D%3D%3D%2085%20%7C%7C%20e.keyCode%20%3D%3D%3D%20117%29%29%20%7B//Alt+c%2C%20Alt+v%20will%20also%20be%20disabled%20sadly.%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20alert%28%27You%20are%20not%20allowed%20to%20view%20the%20content%20of%20the%20page%27%29%3B%0A%20%20%20%20%20%20%20%20%20%20%20%20%7D%0A%20%20%20%20%20%20%20%20%20%20%20%20return%20false%3B%0A%20%20%20%20%7D%3B%0A%20%20%20%20%3C/script%3E%0A%3Cscript%3E%A0%20%0Ajwplayer%28%22jwplayerDiv%22%29.setup%28%7B%0A%A0%A0%A0%A0%A0%A0%A0%20file%3A%20%22https%3A//bpprod6linear.akamaized.net/bpk-tv/irdeto_com_Channel_411/output/manifest.mpd%22%2C%0A%A0%A0%A0%A0%A0%20type%3A%20%22dash%22%2C%0A%A0%A0%A0%A0%A0%20drm%3A%20%7B%20%22clearkey%22%3A%20%7B%0A%A0%A0%A0%A0%A0%A0%A0%A0%A0%A0%A0%A0%A0%20%22keyId%22%3A%20%22bbbc36a45c7a5ec4878e04c437853b09%22%2C%0A%A0%A0%A0%A0%A0%A0%A0%A0%A0%A0%A0%A0%A0%20%22key%22%3A%20%22ec2353b02f54483761d14567ecc15b60%22%0A%A0%A0%A0%A0%A0%A0%A0%A0%A0%A0%A0%20%7D%0A%A0%A0%A0%A0%A0%A0%A0%A0%A0%A0%A0%A0%20%7D%0A%7D%29%3B%0A%3C/script%3E'))
 </script>
 <script>
  alert('Join Telegram for more @seeutv');
