@@ -1,88 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DRM</title>
-    <style>
-    body {
-      padding-top: 50px;
-      color: #868688;
-      background-color: #FAFCFF;
-    }
+    <meta charset="utf-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/2.1.0/shaka-player.compiled.js"></script>
+    <title>MPEG-DASH Player Test</title>
+    <script>
+        var manifestUrl = 'https://my.server.com/drm/manifest_clearkey.mpd';
+        var laUrl       = 'https://my.server.com/drm/laurl_ck.php';
 
-    nav {
-      background-color: #e7e7e7
-    }
+        function initApp() {
+            // Install built-in polyfills to patch browser incompatibilities.
+            shaka.polyfill.installAll();
 
-    nav a {
-      color: #868688;
-    }
+            // Check to see if the browser supports the basic APIs Shaka needs.
+            if (shaka.Player.isBrowserSupported()) {
+                // Everything looks good!
+                initPlayer();
+            } else {
+                // This browser does not have the minimum set of APIs we need.
+                console.error('Browser not supported!');
+            }
+        }
 
-    nav a:hover {
-      color: #606062;
-      text-decoration: none;
-    }
+        function initPlayer() {
+            // Create a Player instance.
+            var video = document.getElementById('video');
+            var player = new shaka.Player(video);
 
-    .navbar-toggle .icon-bar {
-      background-color: #868688;
-    }
+            // Configue
+            player.configure({
+                drm: {
+                    servers: {
+                        'org.w3.clearkey': laUrl
+                    },
+                    clearKeys: {
+                        //'kid': 'key'
+                    }
+                }
+            });
 
-    .starter-template {
-      padding: 40px 15px;
-      text-align: center;
-    }
+            // Attach player to the window to make it easy to access in the JS console.
+            window.player = player;
 
-    .video-js {
-      margin: 0 auto;
-    }
-  </style>
+            // Listen for error events.
+            player.addEventListener('error', onErrorEvent);
 
+            // Try to load a manifest.
+            // This is an asynchronous process.
+            player.load(manifestUrl).then(function () {
+                // This runs if the asynchronous load is successful.
+                console.log('The video has now been loaded!');
+            }).catch(onError);  // onError is executed if the asynchronous load fails.
+        }
+
+        function onErrorEvent(event) {
+            // Extract the shaka.util.Error object from the event.
+            onError(event.detail);
+        }
+
+        function onError(error) {
+            console.error('Error code', error.code, 'object', error);
+            alert("ErrorCode="+error.code);
+        }
+
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
 </head>
 <body>
-
-  <video id=example-video width=640 height=360 class="video-js vjs-default-skin" controls preload="metadata"></video>
-
-  <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet" />
-
-  <script src="https://vjs.zencdn.net/7.8.3/video.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/dashjs/3.1.1/dash.all.debug.js"></script>
-  <script src="	https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-dash/2.11.0/videojs-dash.js"></script>
-
-
-  <script>
-        var player = videojs('example-video');
-        player.ready(function() {
-          player.src({
-              //src: 'my aws s3 bucket link, example',
-              src: "https://bpprod3catchup.akamaized.net/bpk-tv/irdeto_com_Channel_301/output/manifest.mpd", 
-              type: "application/dash+xml",
-
-              //To playback WV content, you must provide the URL to a Widevine license server proxy.
-               keySystemOptions: [
-              {
-                  name: 'com.widevine.alpha',
-                  options: {
-                      serverURL: 'https://denver1769.in/TP/DenverKey.php?id=32'
-
-                  }
-              },
-              {
-                  name: 'com.microsoft.playready',
-                  options: {
-                      serverURL: 'https://denver1769.in/TP/DenverKey.php?id=32'
-
-                  }
-              }
-          ]
-          });
-
-  player.play();
-    });
-
-    </script>
+    <video id="video" autoplay controls></video>
 </body>
-
-
 </html>
