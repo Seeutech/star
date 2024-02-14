@@ -3,9 +3,11 @@
 <script src="https://content.jwplatform.com/libraries/SAHhwvZq.js"></script>
 
 <div id="jwplayerDiv"></div>
-<body>
-  <input type="text" onselectstart="return false" onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false" onDrop="return false" autocomplete=off/>
-</body>
+ <script>
+    document.addEventListener("contextmenu", function (event) {
+      event.preventDefault();
+    });
+  </script>
 <script>  
 jwplayer("jwplayerDiv").setup({
         file: "https://bpprod6linear.akamaized.net/bpk-tv/irdeto_com_Channel_411/output/manifest.mpd",
